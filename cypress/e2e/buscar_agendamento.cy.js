@@ -1,20 +1,32 @@
 /// <reference types="cypress"/>
 
-// arquitetura dos casos de testes
+const agendamento_payload = require('../fixtures/agendamento_payload.json')
 
 describe('Buscar agendamento', () => {
     it('Buscar agendamento com sucesso', () => {
-        // ações
-        cy.request({
-            method: "GET",
-            url: "https://restful-booker.herokuapp.com/booking/12"
-        }).then((result) => {
-            // validações 
-            expect(result.status).to.equal(200)
-            expect(result.body.firstname).to.equal("Josh")
-            expect(result.body.lastname).to.equal("Allen")
-            expect(result.body.totalprice).to.equal(111)
 
+        // cadastrar agendamento 
+        cy.request({
+            method: "POST",
+            url: "https://restful-booker.herokuapp.com/booking/",
+            body: agendamento_payload
+
+        }).then((result) => {
+            expect(result.status).to.equal(200)
+
+            const id = result.body.bookingid;
+
+            cy.request({
+                method: "GET",
+                url: `https://restful-booker.herokuapp.com/booking/${id}`,
+
+            }).then((result) => {
+                expect(result.status).to.equal(200)
+                expect(result.body.firstname).to.equal(agendamento_payload.firstname);
+                expect(result.body.lastname).to.equal(agendamento_payload.lastname);
+                expect(result.body.totalprice).to.equal(agendamento_payload.totalprice);
+
+            });
         });
     });
 

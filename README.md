@@ -49,6 +49,18 @@ ___
 Arquitetura em construção.O link será adicionado em breve
 
 ## 🧪 Testes Automatizados
+- <b>buscar_agendamento</b>
+    - Buscar agendamento com sucesso ✅
+    - Buscar agendamento inexistente ✅
+- <b>cadastrar_agendamento</b>
+    - cadastrar agendamento com sucesso ✅
+    - cadastrar agendamento com campo inválido ✅
+- <b>deletar_agendamento</b>
+    - deletar agendamento com sucesso ✅
+    - deletar agendamento inexistente ✅
+- <b>atualizar_agendamento</b>
+    - atualizar agendamento com sucesso ✅
+    - atualizar agendamento com campo inválido ✅
 
 </div>
  
