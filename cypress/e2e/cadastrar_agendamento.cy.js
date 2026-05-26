@@ -1,20 +1,16 @@
 /// <reference types="cypress"/>
 
-import { faker } from '@faker-js/faker'
+const cadastro_payload = require('../fixtures/gerar_dados.js')
 
 describe('Cadastrar agendamento', () => {
 
-        const payload = {
-            "firstname": faker.person.firstName(),
-            "lastname": faker.person.lastName(),
-            "totalprice": faker.number.int({ min: 100, max: 1000}),
-            "depositpaid": true,
-            "bookingdates": {
-                "checkin": faker.date.anytime(),
-                "checkout": faker.date.anytime(),
-            },
-            "additionalneeds": faker.lorem.word()
-        }
+    let payload 
+
+    beforeEach(() => {
+        payload = cadastro_payload.gerarPayloadCadastro()
+
+    })
+
     it('cadastrar agendamento com sucesso - dados aleatorios (Faker-js)', () => {
 
         cy.request({
