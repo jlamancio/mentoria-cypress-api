@@ -1,23 +1,33 @@
 /// <reference types="cypress"/>
 
-const agendamento_payload = require('../fixtures/agendamento_payload.json')
-
-
-// arquitetura dos casos de testes
+import { faker } from '@faker-js/faker'
 
 describe('Cadastrar agendamento', () => {
-    it('cadastrar agendamento com sucesso', () => {
+
+        const payload = {
+            "firstname": faker.person.firstName(),
+            "lastname": faker.person.lastName(),
+            "totalprice": faker.number.int({ min: 100, max: 1000}),
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": faker.date.anytime(),
+                "checkout": faker.date.anytime(),
+            },
+            "additionalneeds": faker.lorem.word()
+        }
+    it('cadastrar agendamento com sucesso - dados aleatorios (Faker-js)', () => {
+
         cy.request({
             method: "POST",
             url: "https://restful-booker.herokuapp.com/booking/",
-            body: agendamento_payload
+            body: payload,
 
         }).then((result) => {
             expect(result.status).to.equal(200)
             expect(result.body.bookingid).not.NaN
-            expect(result.body.booking.firstname).to.equal(agendamento_payload.firstname)
-            expect(result.body.booking.lastname).to.equal(agendamento_payload.lastname)
-            expect(result.body.booking.totalprice).to.equal(agendamento_payload.totalprice)
+            expect(result.body.booking.firstname).to.equal(payload.firstname)
+            expect(result.body.booking.lastname).to.equal(payload.lastname)
+            expect(result.body.booking.totalprice).to.equal(payload.totalprice)
 
         })
     })
@@ -25,7 +35,7 @@ describe('Cadastrar agendamento', () => {
     it('cadastrar agendamento com campo inválido', () => {
 
         const payload_invalido = {
-            ...agendamento_payload,
+            ...payload,
             firstname: 123456
         }
 

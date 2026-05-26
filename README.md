@@ -1,7 +1,7 @@
  <div style="background-color:#f9f9f9; padding:10px; border-radius:5px;">
 
-# Mentoria QAzando -Cypress:
-Automação com utilização do framework - ***PLAYWRIGHT***
+# Mentoria QAzando 
+Automação com utilização do framework - ***Cypress***
 ___
 
 # 🎯 Objetivo:
